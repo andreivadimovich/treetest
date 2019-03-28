@@ -1,0 +1,18 @@
+<IfModule autoindex_module>
+	# prevent directory listings
+	Options -Indexes
+	IndexIgnore */*
+</IfModule>
+
+# follow symbolic links
+Options FollowSymlinks
+
+RewriteEngine on
+
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+</IfModule>
+
+RewriteRule ^(.*)$ /public_html/$1
+
+
