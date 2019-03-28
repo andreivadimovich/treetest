@@ -8,7 +8,7 @@
     define('DB_CHAR', 'utf8');
 
     // display errors?
-    define('DEBUG_MODE', true);
+    define('DEBUG_MODE', false);
 
     // modules section
     // Tree module
