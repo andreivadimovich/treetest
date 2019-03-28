@@ -76,7 +76,10 @@
             return isset($data) ? $data : '';
         }
 
-
+        /**
+         * @param int $id
+         * @return string
+         */
         public static function getCost($id) {
             $sql = "
                 SELECT SUM(product.price) as all_cost
