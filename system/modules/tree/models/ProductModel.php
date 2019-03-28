@@ -77,7 +77,10 @@
             return false;
         }
 
-
+        /**
+         * @param int $id
+         * @return string 
+         */
         public static function getCost($id) {
             $product = self::selectById($id);
             if (!empty($product['0']['price'])) {
