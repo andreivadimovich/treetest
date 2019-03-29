@@ -75,14 +75,19 @@
                 }
             }
 
-            // get cost
+            // get cost & more info
             if (isset($_GET['cost']) && isset($_GET['type']) && isset($_GET['id'])) {
                 if ($_GET['type'] == 'product') {
-                    return ProductModel::getCost((int)$_GET['id']);
+                    $r = ProductModel::getInfo((int)$_GET['id']);
+                    return json_encode(array(
+                        'price' => $r['price'],
+                        'color' => ProductModel::COLORS[$r['color']]['title'],
+                        'url' => $r['url'],
+                    ));
                 }
 
                 if ($_GET['type'] == 'category') {
-                    return CategoryModel::getCost((int)$_GET['id']);
+                    return json_encode(array('price' => CategoryModel::getCost((int)$_GET['id'])));
                 }
             }
 

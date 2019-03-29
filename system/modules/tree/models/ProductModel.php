@@ -77,14 +77,11 @@
             return false;
         }
 
-        /**
-         * @param int $id
-         * @return string 
-         */
-        public static function getCost($id) {
+
+        public static function getInfo($id) {
             $product = self::selectById($id);
             if (!empty($product['0']['price'])) {
-                return $product['0']['price'] ? $product['0']['price'] : 'price is empty';
+                return $product['0'] ? $product['0'] : 'info is empty';
             }
         }
     }

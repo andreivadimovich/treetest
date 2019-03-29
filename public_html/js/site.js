@@ -148,9 +148,9 @@ $(document).ready(function() {
 
                             }
                         },
-                        "get the cost": {
+                        "more info": {
                             "separator_before": true,
-                            "label": "get the cost",
+                            "label": "more info",
                             "action": function (data) {
                                 var ref = $.jstree.reference(data.reference);
                                 obj = ref.get_node(data.reference);
@@ -165,7 +165,16 @@ $(document).ready(function() {
                                 }
 
                                 $.get("/?cost=true&type="+type+"&id="+id, function(data) {
-                                    alert('Cost = '+data+'$');
+                                    obj = jQuery.parseJSON(data);
+
+                                    var msg = 'Price '+ obj.price+"\r\n";
+                                    if (obj.color !== undefined && obj.color !== '') {
+                                        msg += 'Color '+ obj.color+"\r\n";
+                                    }
+                                    if (obj.url !== undefined && obj.url !== '') {
+                                        msg += 'URL '+ obj.url+"\r\n";
+                                    }
+                                    alert(msg);
                                 });
                             }
                         },
