@@ -4,13 +4,6 @@
 
     class BaseController
     {
-        private $system_name;
-
-        function __construct() {
-            $this->system_name = "bicycle";
-        }
-
-
         /**
          * @param $content
          * @return mixed|string
