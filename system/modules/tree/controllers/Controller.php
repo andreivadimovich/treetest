@@ -29,9 +29,9 @@
                 $insertProduct = $this->addProduct(
                     parent::clearVal($_POST['title']),
                     $_POST['subcategory'],
-                    $_POST['url'],
+                    trim($_POST['url']),
                     $_POST['color'],
-                    $_POST['price']
+                    trim($_POST['price'])
                 );
             }
 
