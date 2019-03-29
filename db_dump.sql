@@ -75,7 +75,7 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`id`, `title`, `url`, `color`, `price`) VALUES
-  (2, 'one', '', 1, 1.11),
+  (2, 'one', '', 1, 2.22),
   (3, 'two', '', 2, 2.22),
   (4, 'three', '', 3, 3.33);
 

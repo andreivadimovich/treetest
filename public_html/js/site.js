@@ -167,12 +167,19 @@ $(document).ready(function() {
                                 $.get("/?cost=true&type="+type+"&id="+id, function(data) {
                                     obj = jQuery.parseJSON(data);
 
-                                    var msg = 'Price '+ obj.price+"\r\n";
+                                    var msg = '';
+                                    if (obj.price !== undefined && obj.price !== '' && obj.price !== null) {
+                                        msg += 'Price ' + obj.price + "\r\n";
+                                    }
                                     if (obj.color !== undefined && obj.color !== '') {
                                         msg += 'Color '+ obj.color+"\r\n";
                                     }
                                     if (obj.url !== undefined && obj.url !== '') {
                                         msg += 'URL '+ obj.url+"\r\n";
+                                    }
+
+                                    if (msg == '') {
+                                        msg = 'The info is empty now...';
                                     }
                                     alert(msg);
                                 });

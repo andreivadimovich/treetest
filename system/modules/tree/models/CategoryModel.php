@@ -86,11 +86,11 @@
                 FROM category 
                 LEFT JOIN category_product ON category_product.category_id = category.id 
                 LEFT JOIN product ON product.id = category_product.product_id 
-                WHERE category.id = ?
+                WHERE category.id = ? OR category.parent_id = ?
                 ORDER BY category.id ASC
             ";
             $data = \DB::prepare($sql)
-                ->execute([$id])
+                ->execute([$id, $id])
                 ->fetchAll();
 
             $cost = isset($data) ? $data['0']['all_cost'] : '';
