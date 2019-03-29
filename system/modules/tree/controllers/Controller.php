@@ -29,19 +29,18 @@
                 $insertProduct = $this->addProduct(
                     parent::clearVal($_POST['title']),
                     $_POST['subcategory'],
-                    trim($_POST['url']),
+                    $_POST['url'],
                     $_POST['color'],
-                    trim($_POST['price'])
+                    $_POST['price']
                 );
             }
 
             // select all
             if (isset($_GET['all']) && !empty($_GET['all'])) {
-                $all = self::toFlat(CategoryModel::selectWithProduct());
-                $all = array_unique($all, SORT_REGULAR);
-                exit(json_encode(
-                    self::buildTree($all)
-                ));
+                $all = CategoryModel::selectWithProduct();
+                $all = self::toFlat($all);
+                $all = self::buildTree($all);
+                exit(json_encode($all));
             }
 
             // update
@@ -158,30 +157,41 @@
         protected static function toFlat(array $a) {
             $result=[];
             foreach ($a as $r) {
+
+                //+node
+                if ((isset($r['category_title']) && !empty($r['category_title'])
+                    && isset($r['category_id']) && !empty($r['category_id']))) {
+
+                        $key_id = parent::searchArrayValue($r['category_id'], 'id', $result);
+                        $key_text = parent::searchArrayValue($r['category_title'], 'text', $result);
+
+                        if ($key_id === false && $key_text === false) {
+                            $new_category = array(
+                                'parent' => !empty($r['parent']) ? $r['parent'] : null,
+                                'id' => $r['category_id'],
+                                'text' => $r['category_title'],
+                                'icon' => $r['icon'],
+                            );
+                            array_push($result, $new_category);
+                        }
+                }
+
+                //+child
                 if (isset($r['product_title']) && !empty($r['product_title'])
                     && isset($r['category_title']) && !empty($r['category_title'])) {
 
                     $new = array(
                         'parent' => $r['category_id'],
                         'product_id' => $r['product_id'],
-                        'id' => 'product'.$r['product_id'],
+                        'id' => 'product' . $r['product_id'],
                         'text' => $r['product_title'],
                         'icon' => $r['icon'],
                     );
                     array_push($result, $new);
-
                     unset($r['product_id'], $r['product_title']);
                 }
-
-                $r = array(
-                    'parent' => $r['parent'],
-                    'id' => $r['category_id'],
-                    'text' => $r['category_title'],
-                    'icon' => $r['icon'],
-                );
-
-                array_push($result, $r);
             }
+
             return $result;
         }
 
@@ -198,9 +208,9 @@
             'id_column_name' => 'id'], $parentId = 0) {
             $branch = array();
             foreach ($elements as $element) {
-
                 if ($element[$options['parent_id_column_name']] == $parentId) {
                     $children = self::buildTree($elements, $options, $element[$options['id_column_name']]);
+
                     if ($children) {
                         $element[$options['children_key_name']] = $children;
                     } else {

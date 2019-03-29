@@ -99,4 +99,21 @@
 
             return '<select name="'.$select_name.'"><option value="0">parent</option></select>';
         }
+
+
+        /**
+         * @param $value
+         * @param $key
+         * @param $array
+         * @return bool|int|string
+         */
+        protected static function searchArrayValue($value, $key, $array) {
+            foreach ($array as $k => $v) {
+                if ($v[$key] == $value) {
+                    return $k;
+                }
+            }
+
+            return false;
+        }
     }
