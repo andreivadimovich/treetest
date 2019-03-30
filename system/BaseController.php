@@ -15,7 +15,7 @@
         }
 
         /**
-         * @param $path_name absolute path to file
+         * @param string $path_name absolute path to file
          * @param array $params
          * @return bool|string
          */
@@ -60,7 +60,7 @@
          * @return mixed
          */
         public static function clearVal($val) {
-            return preg_replace('~[^0-9a-zA-Z\ ]+~u', '', trim($val));
+            return preg_replace('~[^0-9a-zA-Z\ \-]+~u', '', trim($val));
         }
 
 

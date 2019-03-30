@@ -61,7 +61,7 @@
                     {$pt}.id as product_id, 
                     {$ct}.id as category_id, 
                     {$ct}.parent_id as `parent`,
-                    IF({$pt}.id IS NULL, 'jstree-icon jstree-themeicon', '') as icon
+                    IF(product_id IS NULL, '', 'jstree-icon jstree-themeicon') as icon
                 FROM {$ct} 
                     LEFT JOIN {$pst} ON {$pst}.category_id = {$ct}.id 
                     LEFT JOIN {$pt} ON {$pt}.id = {$pst}.product_id

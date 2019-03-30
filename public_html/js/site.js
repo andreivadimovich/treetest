@@ -5,35 +5,34 @@ $(document).ready(function() {
     var validate_price_error = 'Enter the number with two digits';
 
     // category add
-    $('#category_add').submit(function(e) {
+    $('#category_add').submit(function() {
         var name = $(this).find('input[name="title"]');
 
-        if (name.val() == '' || name.val() == undefined ||
-            (/^[a-zA-Z0-9 ]*$/.test(name.val()) == false)) {
-            name.css('border', '2px solid red');
-            alert(validate_error);
-            return false;
+        if (name!== undefined) {
+            if (name.val() === '' || name.val() === undefined ||
+                (/^[a-zA-Z0-9 \-]*$/.test(name.val()) === false)) {
+                name.css('border', '2px solid red');
+                alert(validate_error);
+                return false;
+            }
         }
-        return true;
-
-        e.preventDefault();
     });
 
     // product submit
-    $('#product_add').submit(function(e) {
-
+    $('#product_add').submit(function() {
         var name = $(this).find('input[name="title"]');
         var url = $(this).find('input[name="url"]');
         var price = $(this).find('input[name="price"]');
 
         if (name.val() == '' || name.val() == undefined ||
-            (/^[a-zA-Z0-9 ]*$/.test(name.val()) == false)) {
+            (/^[a-zA-Z0-9 \-]*$/.test(name.val()) == false)) {
             name.css('border', '2px solid red');
             alert(validate_error);
             return false;
         }
 
-        if (url.val() !== "" && url.val() !== undefined && isURL(url.val()) == false) {
+        if (url.val() !== "" && url.val() !== undefined
+            && isURL(url.val()) == false) {
             url.css('border', '2px solid red');
             alert(validate_error);
             return false;
@@ -46,10 +45,6 @@ $(document).ready(function() {
                 return false;
             }
         }
-
-        return true;
-
-        e.preventDefault();
     });
 
 
@@ -94,11 +89,11 @@ $(document).ready(function() {
                             case 'delete_node':
                                 console.log(node.data);
 
-                                if (type == 'product') {
+                                if (String(type) == 'product') {
                                     var product_id = node.data.replace(/[^.\d]+/g,"");
                                     var delete_state = deleteProduct(product_id);
                                     alert('The product deleted');
-                                } else if (type == 'category') {
+                                } else if (String(type) == 'category') {
                                     var category_id = node.data;
                                     var delete_state = deleteCategory(category_id);
                                     alert('The category deleted');
@@ -109,7 +104,7 @@ $(document).ready(function() {
                             case 'rename_node':
                                 setTimeout(function() {
                                     state = update(node.data.replace(/[^.\d]+/g,""), node.text, type);
-                                },0.1)
+                                },0.1);
                                 break;
 
 
@@ -178,7 +173,7 @@ $(document).ready(function() {
                                         msg += 'URL '+ obj.url+"\r\n";
                                     }
 
-                                    if (msg == '') {
+                                    if (msg === undefined || String(msg) == '') {
                                         msg = 'The info is empty now...';
                                     }
                                     alert(msg);

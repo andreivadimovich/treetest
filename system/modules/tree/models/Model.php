@@ -57,14 +57,10 @@
          * @return bool
          */
         public static function update($id, $new_name) {
-            try {
-                $sql = 'UPDATE ' . static::tableName() . ' SET title = ? WHERE id = ?';
-                $exec = \DB::prepare($sql)
-                    ->execute([$new_name, $id]);
+            $sql = 'UPDATE ' . static::tableName() . ' SET title = ? WHERE id = ?';
+            $exec = \DB::prepare($sql)
+                ->execute([$new_name, $id]);
 
-                return true;
-            }catch (\Exception $e) {
-                print_r($e->getMessage());
-            }
+            return true;
         }
     }

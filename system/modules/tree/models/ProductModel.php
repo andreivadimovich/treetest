@@ -83,5 +83,7 @@
             if (!empty($product['0']['price'])) {
                 return $product['0'] ? $product['0'] : 'info is empty';
             }
+
+            return false;
         }
     }

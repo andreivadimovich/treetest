@@ -79,11 +79,18 @@
             if (isset($_GET['cost']) && isset($_GET['type']) && isset($_GET['id'])) {
                 if ($_GET['type'] == 'product') {
                     $r = ProductModel::getInfo((int)$_GET['id']);
-                    return json_encode(array(
-                        'price' => $r['price'],
-                        'color' => ProductModel::COLORS[$r['color']]['title'],
-                        'url' => $r['url'],
-                    ));
+                    if (isset($r) && is_array($r) && count($r) > 0) {
+                        return json_encode(array(
+                            'price' => isset($r['price']) && !empty($r['price']) ? $r['price'] : 0,
+                            'color' => isset($r['color']) ? ProductModel::COLORS[$r['color']]['title'] : '',
+                            'url' => isset($r['url']) && !empty($r['url']) ? $r['url'] : '',
+                        ));
+                    } else {
+                        return json_encode(array(
+                            'error' => 'not found'
+                        ));
+
+                    }
                 }
 
                 if ($_GET['type'] == 'category') {
