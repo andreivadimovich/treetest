@@ -199,6 +199,6 @@ function isURL(str) {
 }
 
 function isFloat(n){
-    var er = /^[0-9].[0-9]{2}$/;
+    var er = /^\d{1,10}.\d{2}$/;
     return er.test(n);
 }

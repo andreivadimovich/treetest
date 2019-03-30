@@ -11,5 +11,7 @@
     define('DEBUG_MODE', false);
 
     // modules section
+    define('APP_CORE',  str_replace('system', '', __DIR__));
+
     // Tree module
     define('APP_TREE',  str_replace('system', '', __DIR__));

@@ -1,6 +1,6 @@
 <?php
 
-    namespace system;
+    namespace system\modules\core\controllers;
 
     class BaseController
     {
@@ -9,7 +9,8 @@
          * @return mixed|string
          */
         protected static function withMainView($content) {
-            $layout = file_get_contents(__DIR__.'/views/main_layout.php');
+            $view_path = APP_CORE.'system/modules/core/views/main_layout.php';
+            $layout = file_get_contents($view_path);
             $built = str_replace('#page_view#', $content, $layout);
             return $built ? $built : '';
         }
@@ -21,12 +22,11 @@
          */
         public static function getView($path_name = '', $params = array()) {
             if ($path_name !== '') {
-                $file = __DIR__ . $path_name;
-                if (!file_exists($file)) {
+                if (!file_exists($path_name)) {
                     return false;
                 }
 
-                $content = file_get_contents($file);
+                $content = file_get_contents($path_name);
                 if (!$content) {
                     return false;
                 }

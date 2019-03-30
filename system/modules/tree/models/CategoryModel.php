@@ -100,4 +100,20 @@
 
             return $cost;
         }
+
+        /**
+         * @param $id
+         * @return mixed
+         */
+        public static function deleteById($id) {
+            if (!$id) {
+                return false;
+            }
+
+            $sql_child = 'DELETE FROM '.self::tableName().' WHERE id = ? OR parent_id = ?';
+            $result_child = \DB::prepare($sql_child)
+                ->execute([$id, $id]);
+
+            return true;
+        }
     }

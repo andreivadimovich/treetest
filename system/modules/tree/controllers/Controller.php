@@ -1,7 +1,7 @@
 <?php
 
     namespace system\modules\tree\controllers;
-    use system\BaseController;
+    use system\modules\core\controllers\BaseController;
 
     use system\modules\tree\models\CategoryModel;
     use system\modules\tree\models\ProductModel;
@@ -112,7 +112,7 @@
 
             // the add form view
             if (isset($_GET['add']) && !empty($_GET['add'])) {
-                $view = '/modules/tree/views/form_add.php';
+                $view = APP_CORE.'system/modules/tree/views/form_add.php';
             }
 
             // build view
