@@ -9,7 +9,7 @@
          * @return mixed|string
          */
         protected static function withMainView($content) {
-            $view_path = APP_CORE.'system/modules/core/views/main_layout.php';
+            $view_path = APP.'system/modules/core/views/main_layout.php';
             $layout = file_get_contents($view_path);
             $built = str_replace('#page_view#', $content, $layout);
             return $built ? $built : '';

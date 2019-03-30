@@ -112,7 +112,7 @@
 
             // the add form view
             if (isset($_GET['add']) && !empty($_GET['add'])) {
-                $view = APP_CORE.'system/modules/tree/views/form_add.php';
+                $view = APP.'system/modules/tree/views/form_add.php';
             }
 
             // build view

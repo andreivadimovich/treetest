@@ -28,8 +28,8 @@
         spl_autoload_register( function( $class_name ) {
             $file_name = str_replace('\\', '/', $class_name. '.php');
 
-            if (file_exists( APP_TREE.$file_name )) {
-                require APP_TREE . $file_name;
+            if (file_exists( APP.$file_name )) {
+                require APP . $file_name;
             }
         });
         $class_tree = new system\modules\tree\controllers\Controller;
