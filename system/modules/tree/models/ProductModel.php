@@ -43,7 +43,7 @@
          * @param int $subcategory_id
          * @return bool|string
          */
-        public function insert($name, $subcategory_id = 0, $color, $url, $price) {
+        public function insert($name, $subcategory_id = 0, $color, $url, $price, $food) {
             if (self::isExist($name) > 0) {
                 return 'Exists! Please select the other name';
             }
@@ -52,10 +52,10 @@
                 return 'Select at least one category';
             }
 
-            if (isset($name) && isset($color) && isset($url) && isset($price)) {
-                $query = "INSERT INTO " . self::tableName() . " VALUES (?, ?, ?, ?, ?)";
+            if (isset($name) && isset($color) && isset($url) && isset($price) && isset($food)) {
+                $query = "INSERT INTO " . self::tableName() . " VALUES (?, ?, ?, ?, ?, ?)";
                 $productAdd = \DB::prepare($query)
-                    ->execute([NULL, $name, $color, $url, $price]);
+                    ->execute([NULL, $name, $color, $url, $price, $food]);
                 if (!$productAdd) {
                     return 'Error! Cant create the new product';
                 }
@@ -80,7 +80,7 @@
 
         public static function getInfo($id) {
             $product = self::selectById($id);
-            if (!empty($product['0']['price'])) {
+            if (!empty($product['0']) && count($product['0']) > 0) {
                 return $product['0'] ? $product['0'] : 'info is empty';
             }
 

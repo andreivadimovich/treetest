@@ -67,7 +67,8 @@ CREATE TABLE `product` (
   `title` varchar(255) NOT NULL,
   `url` varchar(255) DEFAULT NULL,
   `color` int(1) UNSIGNED DEFAULT NULL,
-  `price` float NOT NULL
+  `price` float NOT NULL,
+  `food` int(1) UNSIGNED DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --

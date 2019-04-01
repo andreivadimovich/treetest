@@ -69,6 +69,19 @@
 
             <tr>
                 <td>
+                    Food?
+                </td>
+
+                <td>
+                    <select name="food">
+                        <option value="0">no</option>
+                        <option value="1">yes</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
                     Color
                 </td>
 

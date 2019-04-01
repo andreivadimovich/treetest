@@ -31,7 +31,8 @@
                     $_POST['subcategory'],
                     trim($_POST['url']),
                     $_POST['color'],
-                    trim($_POST['price'])
+                    trim($_POST['price']),
+                    trim($_POST['food'])
                 );
             }
 
@@ -84,6 +85,7 @@
                             'price' => isset($r['price']) && !empty($r['price']) ? $r['price'] : 0,
                             'color' => isset($r['color']) ? ProductModel::COLORS[$r['color']]['title'] : '',
                             'url' => isset($r['url']) && !empty($r['url']) ? $r['url'] : '',
+                            'food' => isset($r['food']) && !empty($r['food']) ? $r['food'] : 0,
                         ));
                     } else {
                         return json_encode(array(
@@ -147,9 +149,10 @@
          * @param $color
          * @param $url
          * @param $price
+         * @param $food
          * @return bool|string
          */
-        protected function addProduct($title, $category_id, $color, $url, $price) {
+        protected function addProduct($title, $category_id, $color, $url, $price, $food) {
             $product = new ProductModel();
 
             return $product->insert(
@@ -157,7 +160,8 @@
                 isset($category_id) ? (int)$category_id : 0,
                 $color,
                 $url,
-                $price
+                $price,
+                $food
             );
         }
 

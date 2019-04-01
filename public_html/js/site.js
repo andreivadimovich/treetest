@@ -172,6 +172,10 @@ $(document).ready(function() {
                                     if (obj.url !== undefined && obj.url !== '') {
                                         msg += 'URL '+ obj.url+"\r\n";
                                     }
+                                    if (obj.food !== undefined && obj.food !== ''
+                                        && obj.food !== '0') {
+                                        msg += "food !\r\n";
+                                    }
 
                                     if (msg === undefined || String(msg) == '') {
                                         msg = 'The info is empty now...';
